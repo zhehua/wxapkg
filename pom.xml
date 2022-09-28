@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.hm</groupId>
+    <artifactId>wxapkg</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+    </properties>
+    <build>
+        <finalName>native-image-js</finalName>
+
+        <plugins>
+            <plugin>
+                <groupId>org.graalvm.nativeimage</groupId>
+                <artifactId>native-image-maven-plugin</artifactId>
+                <version>20.3.0</version>
+                <configuration>
+                    <!-- imageName用于设置生成的二进制文件名称 -->
+                    <imageName>${project.artifactId}</imageName>
+                    <!-- mainClass用于指定main方法类路径 -->
+                    <mainClass>com.hm.Main</mainClass>
+                    <!-- native image 编译参数文档：https://docs.oracle.com/en/graalvm/enterprise/20/docs/reference-manual/native-image/NativeImageMavenPlugin/ -->
+                    <buildArgs>
+                        --no-fallback
+                    </buildArgs>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>native-image</goal>
+                        </goals>
+                        <phase>package</phase>
+                    </execution>
+                </executions>
+            </plugin>
+
+
+        </plugins>
+    </build>
+
+</project>
